@@ -20,7 +20,7 @@ function Post({ data, location, pathContext }) {
         <p>
           {prev && (
             <Link to={prev.frontmatter.path}>
-              Previous: {prev.frontmater.title}
+              Previous: {prev.frontmatter.title}
             </Link>
           )}
         </p>
