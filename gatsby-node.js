@@ -5,7 +5,10 @@ function createPages({ boundActionCreators, graphql }) {
 
   const query = graphql(`
     {
-      allMarkdownRemark {
+      allMarkdownRemark(
+        sort: { order: DESC, fields: [frontmatter___date] }
+        limit: 1000
+      ) {
         edges {
           node {
             html
@@ -42,8 +45,8 @@ function createPostPages(createPage, posts) {
       component: postTemplate,
       context: {
         previous: index === 0 ? null : posts[index - 1].node,
-        next: index === posts.length - 1 ? null : posts[index + 1].node
-      }
+        next: index === posts.length - 1 ? null : posts[index + 1].node,
+      },
     });
   });
 }
@@ -69,8 +72,8 @@ function createTagPages(createPage, posts) {
     path: "/tags",
     component: allTagsTemplate,
     context: {
-      tags
-    }
+      tags,
+    },
   });
 
   // page for each tag
@@ -80,8 +83,8 @@ function createTagPages(createPage, posts) {
       component: tagTemplate,
       context: {
         posts,
-        tag
-      }
+        tag,
+      },
     });
   }
 }
